@@ -239,7 +239,25 @@
       transform: translateY(-10px) scale(1.03);
       box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
     }
+    
+    /* 🔥 Hover = REEMPLAZA */
+    .accesorio:hover .img-static {
+      display: none;
+    }
 
+    .accesorio:hover .img-video {
+      display: block;
+    }
+
+    /* efecto premium */
+    .accesorio {
+      transition: transform .3s ease, box-shadow .3s;
+    }
+
+    .accesorio:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+    }
     .card:hover img {
       transform: scale(1.05);
       transition: 0.3s;
@@ -514,33 +532,38 @@
     <h2>👕 Coleccion Green House x MODBLOCK</h2>
     <p>Ropa comoda, natural y estilo urbano</p>
 
-    <div class="ropa-grid">
-
-      <!-- CAMISETAS -->
-      <div class="card">
-        <img src="https://i.pinimg.com/1200x/44/8d/48/448d48a2dc4461d216a8f43f947be3fe.jpg">
-        <div class="content">
-          <button class="buy" onclick="mostrarRopa('camisetas')">Ver camisetas</button>
-        </div>
-      </div>
-
-      <!-- SUDADERAS -->
-      <div class="card">
-        <img src="https://i.pinimg.com/736x/38/5a/c5/385ac55545728bacccf4015c1dc2077a.jpg">
-        <div class="content">
-          <button class="buy" onclick="mostrarRopa('sudaderas')">Ver sudaderas</button>
-        </div>
-      </div>
-
       <!-- ACCESORIOS (centrado abajo) -->
       <div class="card accesorio">
-        <img src="https://i.pinimg.com/1200x/99/65/ef/9965ef5304ed59e718cf2df889278dae.jpg">
-        <div class="content">
-          <button class="buy" onclick="mostrarRopa('accesorios')">Ver accesorios</button>
+                <div class="img-container">
+
+          <!-- Imagen normal -->
+          <img src="img/GREENHOUSEXMODBLOCK.jpeg" class="img-static">
+
+          <!-- Video que reemplaza la imagen -->
+          <video class="img-video" muted loop playsinline>
+            <source src="animaciones/animacion GREENHOUSEXMODBLOCK.mp4" type="video/mp4">
+          </video>
+        </div>
+          <button class="buy" onclick="mostrarRopa('accesorios')"> Ver catalogo</button>
         </div>
       </div>
 
     </div>
+    <script>
+      document.querySelectorAll(".accesorio").forEach(card => {
+        const video = card.querySelector(".img-video");
+
+        card.addEventListener("mouseenter", () => {
+          video.currentTime = 0;
+          video.play();
+        });
+
+        card.addEventListener("mouseleave", () => {
+          video.pause();
+          video.currentTime = 0;
+        });
+      });
+    </script>
   </section>
 
   <!-- MEDIAS -->
@@ -638,51 +661,6 @@
   const section = document.getElementById("ropa-section");
 
   let contenido = "";
-
-  if(tipo === "camisetas"){
-    contenido = `
-      <h2 onclick="volverRopa()" style="cursor:pointer;">
-        👕 Coleccion Green House x MODBLOCK
-      </h2>
-      <p>Ropa comoda, natural y estilo urbano</p>
-
-      <h3 style="text-align:center;margin-bottom:20px;">Camisetas</h3>
-
-      <div class="products">
-        <div class="card">
-          <img src="https://i.pinimg.com/1200x/44/8d/48/448d48a2dc4461d216a8f43f947be3fe.jpg">
-          <div class="content">
-            <h3>Camiseta Green</h3>
-            <p class="price">$45.000</p>
-            <button class="buy" onclick="addToCart('Camiseta Green',45000)">Agregar</button>
-          </div>
-        </div>
-      </div>
-      
-    `;
-  }
-
-  if(tipo === "sudaderas"){
-    contenido = `
-      <h2 onclick="volverRopa()" style="cursor:pointer;">
-        👕 Coleccion Green House x MODBLOCK
-      </h2>
-      <p>Ropa comoda, natural y estilo urbano</p>
-
-      <h3 style="text-align:center;margin-bottom:20px;">Sudaderas</h3>
-
-      <div class="products">
-        <div class="card">
-          <img src="https://i.pinimg.com/736x/38/5a/c5/385ac55545728bacccf4015c1dc2077a.jpg">
-          <div class="content">
-            <h3>Sudadera Black</h3>
-            <p class="price">$90.000</p>
-            <button class="buy" onclick="addToCart('Sudadera Black',90000)">Agregar</button>
-          </div>
-        </div>
-      </div>
-    `;
-  }
 
   if(tipo === "accesorios"){
     contenido = `
