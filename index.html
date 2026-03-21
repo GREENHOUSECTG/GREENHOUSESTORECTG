@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="logo.ico">
+  <link rel="apple-touch-icon" href="logo.ico">
+  <title>Green House Vape Store</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Anton, sans-serif;
+    }
+
+    body {
+      background: #10001f;
+      color: white;
+    }
+
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* 🔥 overlay oscuro */
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+
+    /* contenido encima */
+    header * {
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: 60px;
+    }
+
+    header p {
+      color: #22c55e;
+      margin-top: 10px;
+    }
+
+    .contador {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    .contador div {
+      background: #111;
+      padding: 10px 15px;
+      border-radius: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      margin: 10px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .whatsapp {
+      background: #22c55e;
+      color: black;
+    }
+
+    .instagram {
+      border: 1px solid white;
+      color: white;
+    }
+
+    .section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      
+    }
+
+    .card {
+      background: #111;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .content {
+      padding: 15px;
+    }
+
+    .price {
+      color: #22c55e;
+      font-size: 18px;
+      font-weight: bold;
+      justify-self: left;
+    }
+
+    .buy {
+      background: #22c55e;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    /* carrito */
+    #cart-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #22c55e;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      z-index: 999;
+      cursor: pointer;
+    }
+
+    #cart {
+      position: fixed;
+      right: -350px;
+      top: 0;
+      width: 320px;
+      height: 100%;
+      background: #111;
+      padding: 20px;
+      transition: .3s;
+      overflow: auto;
+      z-index: 1000;
+    }
+
+    #cart.active {
+      right: 0;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+      background: #222;
+      padding: 8px;
+      border-radius: 5px;
+    }
+
+    .cart-item button {
+      background: red;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .img-container {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+    }
+
+    /* Imagen */
+    .img-static {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Video oculto */
+    .img-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    /* 🔥 Hover = REEMPLAZA */
+    .vape:hover .img-static {
+      display: none;
+    }
+
+    .vape:hover .img-video {
+      display: block;
+    }
+
+    /* efecto premium */
+    .vape {
+      transition: transform .3s ease, box-shadow .3s;
+    }
+
+    .vape:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
+      transition: 0.3s;
+    }
+
+    .ropa-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    /* hace que el tercero quede centrado abajo */
+    .accesorio {
+      grid-column: span 2;
+      justify-self: center;
+      width: 60%;
+    }
+
+    @media(max-width:600px) {
+      .ropa-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .accesorio {
+        width: 100%;
+      }
+    }
+
+    .ropa-section {
+      background: #eae8e8;
+      color: #111;
+      /* cambia texto a oscuro */
+      border-radius: 20px;
+      padding: 60px 20px;
+      margin-top: 40px;
+    }
+
+    /* títulos dentro */
+    .ropa-section h2 {
+      color: #166534;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    /* títulos dentro */
+    .ropa-section p {
+      color: #101010;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    /* cards dentro de ropa */
+    .ropa-section .card {
+      background: #f9f9f9;
+    }
+
+    /* botones */
+    .ropa-section .buy {
+      background: #166534;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <button id="cart-btn" onclick="toggleCart()">🛒 (<span id="count">0</span>)</button>
+
+  <div id="cart">
+    <button onclick="toggleCart()" style="float:right;background:red;color:white;border:none;">X</button>
+    <h2>Tu pedido 💨</h2>
+    <div id="cart-items"></div>
+    <p id="total">Total: $0</p>
+    <button onclick="sendWhatsApp()" class="buy">Finalizar por WhatsApp</button>
+  </div>
+
+  <header>
+    <video autoplay muted loop playsinline class="video-bg">
+      <source src="animaciones/background.mp4" type="video/mp4">
+    </video>
+    <h1></h1>
+    <p>Vape Store · Estilo urbano premium</p>
+
+    <div class="contador">
+      <div><span id="dias">0</span>d</div>
+      <div><span id="horas">0</span>h</div>
+      <div><span id="minutos">0</span>m</div>
+      <div><span id="segundos">0</span>s</div>
+    </div>
+
+    <a class="btn whatsapp" href="https://wa.me/573052249071">WhatsApp</a>
+    <a class="btn instagram" href="https://instagram.com/greenhouse025">Instagram</a>
+  </header>
+
+  <!-- VAPES -->
+  <section class="section">
+    <h2>🔥 Vapes</h2>
+    <div class="products">
+
+      <div class="card vape">
+        <div class="img-container">
+
+          <!-- Imagen normal -->
+          <img src="vapes/YOVO- MIAMI MENT.jpeg" class="img-static">
+
+          <!-- Video que reemplaza la imagen -->
+          <video class="img-video" muted loop playsinline>
+            <source src="animaciones/animacion YOVO-MIAMI MENT.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="content">
+          <h3>YOVO Miami Mint</h3>
+          <p class="price">$35.000</p>
+          <button class="buy" onclick="addToCart('YOVO Miami Mint',40000)">Agregar</button>
+        </div>
+      </div>
+      <div class="card vape">
+        <div class="img-container">
+
+          <!-- Imagen normal -->
+          <img src="vapes/UBARXHYDRA8000.jpeg" class="img-static">
+
+          <!-- Video que reemplaza la imagen -->
+          <video class="img-video" muted loop playsinline>
+            <source src="animaciones/animacion URBARXHYDRA8000.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="content">
+          <h3>Urbar x Hydra 8000</h3>
+          <p class="price">$35.000</p>
+          <button class="buy" onclick="addToCart('Urbar x Hydra 8000',40000)">Agregar</button>
+        </div>
+      </div>
+
+      <div class="card vape">
+        <div class="img-container">
+
+          <!-- Imagen normal -->
+          <img src="vapes/V-PLAY.jpeg" class="img-static">
+
+          <!-- Video que reemplaza la imagen -->
+          <video class="img-video" muted loop playsinline>
+            <source src="animaciones/animacion V-PLAY.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="content">
+          <h3>V-Play</h3>
+          <p class="price">$50.000</p>
+          <button class="buy" onclick="addToCart('V-Play',40000)">Agregar</button>
+        </div>
+      </div>
+      <div class="card vape">
+        <div class="img-container">
+
+          <!-- Imagen normal -->
+          <img src="vapes/AIR FUZE SMART 30000.jpeg" class="img-static">
+
+          <!-- Video que reemplaza la imagen -->
+          <video class="img-video" muted loop playsinline>
+            <source src="animaciones/animacion AIR FUZE SMART 30000.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="content">
+          <h3>Air Fuze Smart 30000</h3>
+          <p class="price">$80.000</p>
+          <button class="buy" onclick="addToCart('Air Fuze Smart 30000',40000)">Agregar</button>
+        </div>
+      </div>
+      <div class="card vape">
+        <div class="img-container">
+
+          <!-- Imagen normal -->
+          <img src="vapes/SNOOPYSMOKE-STRAWBERRYBANANA.jpeg" class="img-static">
+
+          <!-- Video que reemplaza la imagen -->
+          <video class="img-video" muted loop playsinline>
+            <source src="animaciones/animacion SNOOPYSMOKE-STRAWBERRYBANANA.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="content">
+          <h3>Snoopy Smoke - Strawberry Banana</h3>
+          <p class="price">$35.000</p>
+          <button class="buy" onclick="addToCart('Snoopy Smoke - Strawberry Banana',80000)">Agregar</button>
+        </div>
+      </div>
+      <div class="card vape">
+        <div class="img-container">
+
+          <!-- Imagen normal -->
+          <img src="vapes/FUNKY-REPUBLIC STRAWBERRY DUO ICE.jpeg" class="img-static">
+
+          <!-- Video que reemplaza la imagen -->
+          <video class="img-video" muted loop playsinline>
+            <source src="animaciones/animacion FUNKY-REPUBLIC STRAWBERRY DUO ICE.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="content">
+          <h3>Funky Republic - Strawberry Duo Ice</h3>
+          <p class="price">$30.000</p>
+          <button class="buy" onclick="addToCart('Funky Republic - Strawberry Duo Ice',80000)">Agregar</button>
+        </div>
+      </div>
+      <div class="card vape">
+        <div class="img-container">
+
+          <!-- Imagen normal -->
+          <img src="vapes/URBARXHYDRA5000.jpeg" class="img-static">
+
+          <!-- Video que reemplaza la imagen -->
+          <video class="img-video" muted loop playsinline>
+            <source src="animaciones/animacion URBARXHYDRA5000.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="content">
+          <h3>Urbar x Hydra 5000</h3>
+          <p class="price">$30.000</p>
+          <button class="buy" onclick="addToCart('Urbar x Hydra 5000',80000)">Agregar</button>
+        </div>
+      </div>
+
+    </div>
+    <script>
+      document.querySelectorAll(".vape").forEach(card => {
+        const video = card.querySelector(".img-video");
+
+        card.addEventListener("mouseenter", () => {
+          video.currentTime = 0;
+          video.play();
+        });
+
+        card.addEventListener("mouseleave", () => {
+          video.pause();
+          video.currentTime = 0;
+        });
+      });
+    </script>
+  </section>
+
+  <!-- COMBOS -->
+  <section class="section">
+    <h2>💰 Combos</h2>
+    <div class="products">
+
+      <div class="card">
+        <div class="content">
+          <h3>Combo Vape</h3>
+          <p class="price">2 x $65.000</p>
+          <button class="buy" onclick="addToCart('Combo 2 vapes',65000)">Agregar</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <h3>Combo Party</h3>
+          <p class="price">3 x $90.000</p>
+          <button class="buy" onclick="addToCart('Combo Party',90000)">Agregar</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ROPA -->
+  <section class="section ropa-section" id="ropa-section">
+    <h2>👕 Coleccion Green House x MODBLOCK</h2>
+    <p>Ropa comoda, natural y estilo urbano</p>
+
+    <div class="ropa-grid">
+
+      <!-- CAMISETAS -->
+      <div class="card">
+        <img src="https://i.pinimg.com/1200x/44/8d/48/448d48a2dc4461d216a8f43f947be3fe.jpg">
+        <div class="content">
+          <button class="buy" onclick="mostrarRopa('camisetas')">Ver camisetas</button>
+        </div>
+      </div>
+
+      <!-- SUDADERAS -->
+      <div class="card">
+        <img src="https://i.pinimg.com/736x/38/5a/c5/385ac55545728bacccf4015c1dc2077a.jpg">
+        <div class="content">
+          <button class="buy" onclick="mostrarRopa('sudaderas')">Ver sudaderas</button>
+        </div>
+      </div>
+
+      <!-- ACCESORIOS (centrado abajo) -->
+      <div class="card accesorio">
+        <img src="https://i.pinimg.com/1200x/99/65/ef/9965ef5304ed59e718cf2df889278dae.jpg">
+        <div class="content">
+          <button class="buy" onclick="mostrarRopa('accesorios')">Ver accesorios</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MEDIAS -->
+  <section class="section">
+    <h2>🧦 Medias</h2>
+    <div class="products">
+
+      <div class="card">
+        <img src="https://i.pinimg.com/736x/2a/11/c1/2a11c102c2557b9c4437a455d94c053d.jpg">
+        <div class="content">
+          <h3>Medias Black</h3>
+          <p class="price">$12.000</p>
+          <button class="buy" onclick="addToCart('Medias Black',12000)">Agregar</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://i.pinimg.com/1200x/e5/f4/c3/e5f4c3780f3f0248044acfc2baa872eb.jpg">
+        <div class="content">
+          <h3>Medias White</h3>
+          <p class="price">$12.000</p>
+          <button class="buy" onclick="addToCart('Medias White',12000)">Agregar</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      renderCart();
+    }
+
+    function removeItem(i) {
+      cart.splice(i, 1);
+      renderCart();
+    }
+
+    function renderCart() {
+      let items = document.getElementById("cart-items");
+      let total = document.getElementById("total");
+      let count = document.getElementById("count");
+
+      items.innerHTML = "";
+      let sum = 0;
+
+      cart.forEach((item, i) => {
+        sum += item.price;
+        items.innerHTML += `
+<div class="cart-item">
+<span>${item.name} - $${item.price}</span>
+<button onclick="removeItem(${i})">X</button>
+</div>`;
+      });
+
+      count.innerText = cart.length;
+      total.innerText = "Total: $" + sum;
+    }
+
+    function toggleCart() {
+      document.getElementById("cart").classList.toggle("active");
+    }
+
+    function sendWhatsApp() {
+      if (cart.length === 0) { alert("Carrito vacío"); return; }
+
+      let msg = "Hola quiero comprar:%0A";
+      cart.forEach(i => { msg += `- ${i.name} ($${i.price})%0A`; });
+      let total = cart.reduce((s, i) => s + i.price, 0);
+      msg += `Total: $${total}`;
+
+      window.open(`https://wa.me/573052249071?text=${msg}`);
+    }
+
+    // contador
+    const fechaLanzamiento = new Date("July 1, 2026 00:00:00").getTime();
+
+    setInterval(() => {
+      const ahora = new Date().getTime();
+      const distancia = fechaLanzamiento - ahora;
+
+      document.getElementById("dias").innerHTML = Math.floor(distancia / (1000 * 60 * 60 * 24));
+      document.getElementById("horas").innerHTML = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById("minutos").innerHTML = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById("segundos").innerHTML = Math.floor((distancia % (1000 * 60)) / 1000);
+
+      if (distancia < 0) {
+        document.querySelector(".contador").innerHTML = "🔥 ¡La tienda ya está abierta!";
+      }
+    }, 1000);
+    function mostrarRopa(tipo){
+  const section = document.getElementById("ropa-section");
+
+  let contenido = "";
+
+  if(tipo === "camisetas"){
+    contenido = `
+      <h2 onclick="volverRopa()" style="cursor:pointer;">
+        👕 Coleccion Green House x MODBLOCK
+      </h2>
+      <p>Ropa comoda, natural y estilo urbano</p>
+
+      <h3 style="text-align:center;margin-bottom:20px;">Camisetas</h3>
+
+      <div class="products">
+        <div class="card">
+          <img src="https://i.pinimg.com/1200x/44/8d/48/448d48a2dc4461d216a8f43f947be3fe.jpg">
+          <div class="content">
+            <h3>Camiseta Green</h3>
+            <p class="price">$45.000</p>
+            <button class="buy" onclick="addToCart('Camiseta Green',45000)">Agregar</button>
+          </div>
+        </div>
+      </div>
+      
+    `;
+  }
+
+  if(tipo === "sudaderas"){
+    contenido = `
+      <h2 onclick="volverRopa()" style="cursor:pointer;">
+        👕 Coleccion Green House x MODBLOCK
+      </h2>
+      <p>Ropa comoda, natural y estilo urbano</p>
+
+      <h3 style="text-align:center;margin-bottom:20px;">Sudaderas</h3>
+
+      <div class="products">
+        <div class="card">
+          <img src="https://i.pinimg.com/736x/38/5a/c5/385ac55545728bacccf4015c1dc2077a.jpg">
+          <div class="content">
+            <h3>Sudadera Black</h3>
+            <p class="price">$90.000</p>
+            <button class="buy" onclick="addToCart('Sudadera Black',90000)">Agregar</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  if(tipo === "accesorios"){
+    contenido = `
+      <h2 onclick="volverRopa()" style="cursor:pointer;">
+        👕 Coleccion Green House x MODBLOCK
+      </h2>
+      <p>Ropa comoda, natural y estilo urbano</p>
+
+      <h3 style="text-align:center;margin-bottom:20px;">Accesorios</h3>
+
+      <div class="products">
+        <div class="card">
+          <img src="https://i.pinimg.com/1200x/99/65/ef/9965ef5304ed59e718cf2df889278dae.jpg">
+          <div class="content">
+            <h3>Gorra Green</h3>
+            <p class="price">$35.000</p>
+            <button class="buy" onclick="addToCart('Gorra Green',35000)">Agregar</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  section.innerHTML = contenido;
+}
+    function volverRopa() {
+      const section = document.getElementById("ropa-section");
+
+      section.innerHTML = `
+   <h2 onclick="volverRopa()" style="cursor:pointer;">
+  👕 Coleccion Green House x MODBLOCK
+</h2>
+    <p>Ropa comoda, natural y estilo urbano</p>
+
+    <div class="ropa-grid">
+
+      <div class="card">
+        <img src="https://i.pinimg.com/1200x/44/8d/48/448d48a2dc4461d216a8f43f947be3fe.jpg">
+        <div class="content">
+          <button class="buy" onclick="mostrarRopa('camisetas')">Ver camisetas</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://i.pinimg.com/736x/38/5a/c5/385ac55545728bacccf4015c1dc2077a.jpg">
+        <div class="content">
+          <button class="buy" onclick="mostrarRopa('sudaderas')">Ver sudaderas</button>
+        </div>
+      </div>
+
+      <div class="card accesorio">
+        <img src="https://i.pinimg.com/1200x/99/65/ef/9965ef5304ed59e718cf2df889278dae.jpg">
+        <div class="content">
+          <button class="buy" onclick="mostrarRopa('accesorios')">Ver accesorios</button>
+        </div>
+      </div>
+
+    </div>
+  `;
+    }
+  </script>
+
+</body>
+
+</html>
