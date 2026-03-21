@@ -531,15 +531,9 @@
   <section class="section ropa-section" id="ropa-section">
     <h2>👕 Coleccion Green House x MODBLOCK</h2>
     <p>Ropa comoda, natural y estilo urbano</p>
-
-      <!-- ACCESORIOS (centrado abajo) -->
       <div class="card accesorio">
                 <div class="img-container">
-
-          <!-- Imagen normal -->
           <img src="img/GREENHOUSEXMODBLOCK.jpeg" class="img-static">
-
-          <!-- Video que reemplaza la imagen -->
           <video class="img-video" muted loop playsinline>
             <source src="animaciones/animacion GREENHOUSEXMODBLOCK.mp4" type="video/mp4">
           </video>
@@ -547,7 +541,6 @@
           <button class="buy" onclick="mostrarRopa('accesorios')"> Ver catalogo</button>
         </div>
       </div>
-
     </div>
     <script>
       document.querySelectorAll(".accesorio").forEach(card => {
@@ -642,7 +635,7 @@
     }
 
     // contador
-    const fechaLanzamiento = new Date("July 1, 2026 00:00:00").getTime();
+    const fechaLanzamiento = new Date("March 27, 2026 00:00:00").getTime();
 
     setInterval(() => {
       const ahora = new Date().getTime();
@@ -662,6 +655,7 @@
 
   let contenido = "";
 
+
   if(tipo === "accesorios"){
     contenido = `
       <h2 onclick="volverRopa()" style="cursor:pointer;">
@@ -669,18 +663,52 @@
       </h2>
       <p>Ropa comoda, natural y estilo urbano</p>
 
-      <h3 style="text-align:center;margin-bottom:20px;">Accesorios</h3>
+      <h3 style="text-align:center;margin-bottom:20px;">Prendas</h3>
 
       <div class="products">
         <div class="card">
-          <img src="https://i.pinimg.com/1200x/99/65/ef/9965ef5304ed59e718cf2df889278dae.jpg">
+          <img src="shirts/GREENHOUSEXMODBLOCK T-SHIRT BEIGE.jpeg">
           <div class="content">
-            <h3>Gorra Green</h3>
+            <h3>T-SHIRT BEIGE</h3>
             <p class="price">$35.000</p>
-            <button class="buy" onclick="addToCart('Gorra Green',35000)">Agregar</button>
+            <button class="buy" onclick="addToCart('T-SHIRT BEIGE',35000)">Agregar</button>
           </div>
         </div>
       </div>
+      
+      <div class="products">
+        <div class="card">
+          <img src="shirts/GREENHOUSEXMODBLOCK T-SHIRT BLACK .jpeg">
+          <div class="content">
+            <h3>T-SHIRT BLACK</h3>
+            <p class="price">$35.000</p>
+            <button class="buy" onclick="addToCart('T-SHIRT BLACK',35000)">Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="products">
+        <div class="card">
+          <img src="shirts/GRENHOUSEXMODBLOCK T-SHIRT RED.jpeg">
+          <div class="content">
+            <h3>T-SHIRT RED</h3>
+            <p class="price">$35.000</p>
+            <button class="buy" onclick="addToCart('T-SHIRT RED',35000)">Agregar</button>
+          </div>
+        </div>
+      </div>
+
+
+       <div class="products">
+        <div class="card">
+          <img src="shirts/GREENHOUSEXMODBLOCK HODDIE BLACK.jpeg">
+          <div class="content">
+            <h3>HOODIE BLACK</h3>
+            <p class="price">$80.000</p>
+            <button class="buy" onclick="addToCart('HOODIE BLACK',80000)">Agregar</button>
+          </div>
+        </div>
+
     `;
   }
 
@@ -690,31 +718,22 @@
       const section = document.getElementById("ropa-section");
 
       section.innerHTML = `
-   <h2 onclick="volverRopa()" style="cursor:pointer;">
-  👕 Coleccion Green House x MODBLOCK
-</h2>
+      <h2>👕 Coleccion Green House x MODBLOCK</h2>
     <p>Ropa comoda, natural y estilo urbano</p>
 
-    <div class="ropa-grid">
-
-      <div class="card">
-        <img src="https://i.pinimg.com/1200x/44/8d/48/448d48a2dc4461d216a8f43f947be3fe.jpg">
-        <div class="content">
-          <button class="buy" onclick="mostrarRopa('camisetas')">Ver camisetas</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="https://i.pinimg.com/736x/38/5a/c5/385ac55545728bacccf4015c1dc2077a.jpg">
-        <div class="content">
-          <button class="buy" onclick="mostrarRopa('sudaderas')">Ver sudaderas</button>
-        </div>
-      </div>
-
+      <!-- ACCESORIOS (centrado abajo) -->
       <div class="card accesorio">
-        <img src="https://i.pinimg.com/1200x/99/65/ef/9965ef5304ed59e718cf2df889278dae.jpg">
-        <div class="content">
-          <button class="buy" onclick="mostrarRopa('accesorios')">Ver accesorios</button>
+                <div class="img-container">
+
+          <!-- Imagen normal -->
+          <img src="img/GREENHOUSEXMODBLOCK.jpeg" class="img-static">
+
+          <!-- Video que reemplaza la imagen -->
+          <video class="img-video" muted loop playsinline>
+            <source src="animaciones/animacion GREENHOUSEXMODBLOCK.mp4" type="video/mp4">
+          </video>
+        </div>
+          <button class="buy" onclick="mostrarRopa('accesorios')"> Ver catalogo</button>
         </div>
       </div>
 
