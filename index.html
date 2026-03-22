@@ -18,8 +18,9 @@
     }
 
     body {
-      background: #10001f;
-      color: white;
+       background: url("img/BACKSEC.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: white;
     }
 
     header {
@@ -31,6 +32,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
+      background: url("img/BACKGROUNDPRINCIPAL.jpeg") no-repeat center center fixed;
     }
 
     .video-bg {
@@ -67,7 +69,7 @@
 
     header p {
       color: #22c55e;
-      margin-top: 10px;
+      margin-top: 120px;
     }
 
     .contador {
@@ -319,6 +321,38 @@
       background: #166534;
       color: white;
     }
+    /* VIDEO DE FONDO */
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* CAPA OSCURA (para que todo se vea pro) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+/* CONTENIDO ENCIMA */
+.main-content {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+button {
+  touch-action: manipulation;
+}
   </style>
 </head>
 
@@ -335,11 +369,8 @@
   </div>
 
   <header>
-    <video autoplay muted loop playsinline class="video-bg">
-      <source src="animaciones/background.mp4" type="video/mp4">
-    </video>
     <h1></h1>
-    <p>Vape Store · Estilo urbano premium</p>
+    
 
     <div class="contador">
       <div><span id="dias">0</span>d</div>
@@ -350,6 +381,7 @@
 
     <a class="btn whatsapp" href="https://wa.me/573052249071">WhatsApp</a>
     <a class="btn instagram" href="https://instagram.com/greenhouse025">Instagram</a>
+    <p>Vape Store · Estilo urbano premium</p>
   </header>
 
   <!-- VAPES -->
@@ -538,7 +570,7 @@
             <source src="animaciones/animacion GREENHOUSEXMODBLOCK.mp4" type="video/mp4">
           </video>
         </div>
-          <button class="buy" onclick="mostrarRopa('accesorios')"> Ver catalogo</button>
+          <button class="buy" onclick="mostrarRopa()">Ver catalogo</button>
         </div>
       </div>
     </div>
@@ -558,6 +590,63 @@
       });
     </script>
   </section>
+  <section class="section ropa-section" id="ropa-catalogo" style="display:none;">
+
+  <h2 onclick="volverRopa()" style="cursor:pointer;">
+    👕 Coleccion Green House x MODBLOCK
+  </h2>
+
+  <p>Ropa comoda, natural y estilo urbano</p>
+
+  <div class="products">
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK T-SHIRT BEIGE.jpeg" class="img-static">
+      </div>
+      <div class="content">
+        <h3>T-SHIRT BEIGE</h3>
+        <p class="price">$35.000</p>
+        <button class="buy" onclick="addToCart('T-SHIRT BEIGE',35000)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK T-SHIRT BLACK .jpeg" class="img-static">
+      </div>
+      <div class="content">
+        <h3>T-SHIRT BLACK</h3>
+        <p class="price">$35.000</p>
+        <button class="buy" onclick="addToCart('T-SHIRT BLACK',35000)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK HODDIE BLACK.jpeg" class="img-static">
+      </div>
+      <div class="content">
+        <h3>HODDIE BLACK</h3>
+        <p class="price">$35.000</p>
+        <button class="buy" onclick="addToCart('HODDIE BLACK',35000)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK T-SHIRT RED.jpeg" class="img-static">
+      </div>
+      <div class="content"> 
+        <h3>T-SHIRT RED</h3>
+        <p class="price">$35.000</p>
+        <button class="buy" onclick="addToCart('T-SHIRT RED',35000)">Agregar</button>
+      </div>
+    </div>
+
+  </div>
+
+</section>
 
   <!-- MEDIAS -->
   <section class="section">
@@ -650,96 +739,15 @@
         document.querySelector(".contador").innerHTML = "🔥 ¡La tienda ya está abierta!";
       }
     }, 1000);
-    function mostrarRopa(tipo){
-  const section = document.getElementById("ropa-section");
-
-  let contenido = "";
-
-
-  if(tipo === "accesorios"){
-    contenido = `
-      <h2 onclick="volverRopa()" style="cursor:pointer;">
-        👕 Coleccion Green House x MODBLOCK
-      </h2>
-      <p>Ropa comoda, natural y estilo urbano</p>
-
-      <h3 style="text-align:center;margin-bottom:20px;">Prendas</h3>
-
-      <div class="products">
-        <div class="card">
-          <img src="shirts/GREENHOUSEXMODBLOCK T-SHIRT BEIGE.jpeg">
-          <div class="content">
-            <h3>T-SHIRT BEIGE</h3>
-            <p class="price">$35.000</p>
-            <button class="buy" onclick="addToCart('T-SHIRT BEIGE',35000)">Agregar</button>
-          </div>
-        </div>
-      </div>
-      
-      <div class="products">
-        <div class="card">
-          <img src="shirts/GREENHOUSEXMODBLOCK T-SHIRT BLACK .jpeg">
-          <div class="content">
-            <h3>T-SHIRT BLACK</h3>
-            <p class="price">$35.000</p>
-            <button class="buy" onclick="addToCart('T-SHIRT BLACK',35000)">Agregar</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="products">
-        <div class="card">
-          <img src="shirts/GRENHOUSEXMODBLOCK T-SHIRT RED.jpeg">
-          <div class="content">
-            <h3>T-SHIRT RED</h3>
-            <p class="price">$35.000</p>
-            <button class="buy" onclick="addToCart('T-SHIRT RED',35000)">Agregar</button>
-          </div>
-        </div>
-      </div>
-
-
-       <div class="products">
-        <div class="card">
-          <img src="shirts/GREENHOUSEXMODBLOCK HODDIE BLACK.jpeg">
-          <div class="content">
-            <h3>HOODIE BLACK</h3>
-            <p class="price">$80.000</p>
-            <button class="buy" onclick="addToCart('HOODIE BLACK',80000)">Agregar</button>
-          </div>
-        </div>
-
-    `;
-  }
-
-  section.innerHTML = contenido;
+   function mostrarRopa(){
+  document.getElementById("ropa-section").style.display = "none";
+  document.getElementById("ropa-catalogo").style.display = "block";
 }
-    function volverRopa() {
-      const section = document.getElementById("ropa-section");
 
-      section.innerHTML = `
-      <h2>👕 Coleccion Green House x MODBLOCK</h2>
-    <p>Ropa comoda, natural y estilo urbano</p>
-
-      <!-- ACCESORIOS (centrado abajo) -->
-      <div class="card accesorio">
-                <div class="img-container">
-
-          <!-- Imagen normal -->
-          <img src="img/GREENHOUSEXMODBLOCK.jpeg" class="img-static">
-
-          <!-- Video que reemplaza la imagen -->
-          <video class="img-video" muted loop playsinline>
-            <source src="animaciones/animacion GREENHOUSEXMODBLOCK.mp4" type="video/mp4">
-          </video>
-        </div>
-          <button class="buy" onclick="mostrarRopa('accesorios')"> Ver catalogo</button>
-        </div>
-      </div>
-
-    </div>
-  `;
-    }
+function volverRopa(){
+  document.getElementById("ropa-section").style.display = "block";
+  document.getElementById("ropa-catalogo").style.display = "none";
+}
   </script>
 
 </body>
