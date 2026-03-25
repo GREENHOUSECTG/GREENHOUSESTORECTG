@@ -1193,6 +1193,19 @@ function scrollToSection(id){
   // cerrar menú
   toggleMenu();
 }
+document.querySelectorAll(".accesorio").forEach(card => {
+  const video = card.querySelector(".img-video");
+
+  card.addEventListener("click", () => {
+    if (video.style.display === "block") {
+      video.pause();
+      video.style.display = "none";
+    } else {
+      video.style.display = "block";
+      video.play();
+    }
+  });
+});
 </script>
 <footer class="footer">
   <p>© 2026 Green House Vape Store. Todos los derechos reservados.</p>
