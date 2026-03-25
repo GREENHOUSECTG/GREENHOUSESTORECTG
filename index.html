@@ -1165,19 +1165,6 @@ function volverRopa(){
   document.getElementById("ropa-section").style.display = "block";
   document.getElementById("ropa-catalogo").style.display = "none";
 }
-document.querySelectorAll(".vape, .accesorio").forEach(card => {
-  const video = card.querySelector(".img-video");
-
-  card.addEventListener("click", () => {
-    if (video.style.display === "block") {
-      video.pause();
-      video.style.display = "none";
-    } else {
-      video.style.display = "block";
-      video.play();
-    }
-  });
-});
 document.getElementById("year").textContent = new Date().getFullYear();
   </script>
   <script>
@@ -1192,6 +1179,18 @@ document.getElementById("overlay").addEventListener("click", toggleMenu);
 
 function scrollToSection(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
+  toggleMenu();
+}
+function scrollToSection(id){
+
+  // 🔥 cerrar catálogo si está abierto
+  document.getElementById("ropa-section").style.display = "block";
+  document.getElementById("ropa-catalogo").style.display = "none";
+
+  // scroll normal
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+
+  // cerrar menú
   toggleMenu();
 }
 </script>
