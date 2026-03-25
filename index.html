@@ -14,25 +14,27 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Anton, sans-serif;
+      font-family: 'MiFuente', sans-serif;
     }
-
-    body {
-       background: url("img/BACKSEC.jpg") no-repeat center center fixed;
+body {
+  background: url("img/BACKSEC.jpg") no-repeat center center;
   background-size: cover;
   color: white;
-    }
 
-    header {
-      height: 100vh;
-      display: flex;
+  padding-top: calc(var(--header-height) + env(safe-area-inset-top));
+}
+
+   header:not(.topbar) {
+       min-height: calc(100svh - var(--header-height));
       flex-direction: column;
-      justify-content: center;
+      display: flex;
       align-items: center;
       text-align: center;
       position: relative;
       overflow: hidden;
-      background: url("img/BACKGROUNDPRINCIPAL.jpeg") no-repeat center center fixed;
+      background: url("img/letras.png") no-repeat center center ;
+      background-size: contain;    
+     padding-top: 300px;
     }
 
     .video-bg {
@@ -93,16 +95,39 @@
       text-decoration: none;
       font-weight: bold;
     }
+.btn-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: 0.3s;
+}
 
-    .whatsapp {
-      background: #22c55e;
-      color: black;
-    }
+/* ICONOS */
+.btn-icon svg {
+  width: 26px;
+  height: 26px;
+}
 
-    .instagram {
-      border: 1px solid white;
-      color: white;
-    }
+/* WHATSAPP */
+.btn-icon.whatsapp {
+  background: #22c55e;
+  color: black;
+}
+
+/* INSTAGRAM */
+.btn-icon.instagram {
+  border: 1px solid white;
+  color: white;
+}
+
+/* HOVER */
+.btn-icon:hover {
+  transform: scale(1.1);
+}
 
     .section {
       padding: 60px 20px;
@@ -111,18 +136,19 @@
     }
 
     .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
     }
 
     .card {
-      background: #111;
-      border-radius: 12px;
-      overflow: hidden;
+    background: #111;
+    border-radius: 12px;
+    overflow: hidden;
+    flex: 1 1 200px; /* 👈 clave */
+    max-width: 300px; /* opcional para que no se estiren demasiado */
     }
-
     .card img {
       width: 100%;
       height: 220px;
@@ -242,15 +268,6 @@
       box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
     }
     
-    /* 🔥 Hover = REEMPLAZA */
-    .accesorio:hover .img-static {
-      display: none;
-    }
-
-    .accesorio:hover .img-video {
-      display: block;
-    }
-
     /* efecto premium */
     .accesorio {
       transition: transform .3s ease, box-shadow .3s;
@@ -262,20 +279,21 @@
     }
     .card:hover img {
       transform: scale(1.05);
-      transition: 0.3s;
+      transition: 0.3s
     }
 
     .ropa-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
     }
 
     /* hace que el tercero quede centrado abajo */
     .accesorio {
-      grid-column: span 2;
-      justify-self: center;
-      width: 60%;
+    grid-column: span 2;
+    justify-self: center;
+    width: 60%;
     }
 
     @media(max-width:600px) {
@@ -353,15 +371,267 @@ body::before {
 button {
   touch-action: manipulation;
 }
+@media(max-width:600px) {
+  .card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+:root {
+  --header-height: 70px;
+}
+
+/* HEADER APP */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(10px);
+
+  z-index: 1000; /* topbar detrás del carrito */
+}
+
+/* MENU */
+.menu-btn {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* LOGO CENTRADO */
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo img {
+  height: 125px;
+ padding-top: 18px;
+}
+
+/* CARRITO */
+.cart-icon {
+  font-size: 22px;
+  cursor: pointer;
+  position: relative;
+}
+
+.cart-icon span {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #22c55e;
+  color: black;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+.subtitle {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #22c55e;
+}
+
+/* CONTADOR */
+.contador {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  font-size: 18px;
+  justify-content: center;
+}
+
+.contador div {
+  background: rgba(0,0,0,0.7);
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+/* BOTONES DEBAJO */
+.actions {
+  margin-top: 25px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+}
+/* MENU HAMBURGUESA */
+#cart-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #22c55e;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  z-index: 10001; /* botón arriba del overlay y topbar */
+  cursor: pointer;
+}
+
+#cart {
+  position: fixed;
+  right: -350px;
+  top: 0;
+  width: 320px;
+  height: 100%;
+  background: #111;
+  padding: 20px;
+  transition: .3s;
+  overflow: auto;
+  z-index: 10000; /* carrito sobre topbar */
+}
+
+#cart.active {
+  right: 0;
+}
+
+/* Botón cerrar dentro del carrito */
+#cart button {
+  position: relative;
+  z-index: 10002; /* siempre arriba */
+}
+
+/* ======= MENÚ LATERAL ======= */
+#overlay{
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  z-index: 1001; /* encima de topbar */
+
+}
+
+#side-menu{
+   position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100%;
+  background: linear-gradient(180deg, #111, #222);
+  padding: 30px 20px;
+  transition: 0.3s;
+  z-index: 1002;
+  box-shadow: 4px 0 15px rgba(0,0,0,0.5);
+  border-right: 1px solid rgba(255,255,255,0.05);
+  font-family: 'Anton', sans-serif;
+}
+#side-menu ul {
+  list-style: none;
+  margin-top: 50px;
+  padding: 0;
+}
+#side-menu li {
+  padding: 15px 10px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: #22c55e;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s;
+  font-family: 'MiFuente', sans-serif;
+}
+#side-menu li:hover {
+  background: rgba(34, 197, 94, 0.2);
+  transform: translateX(5px);
+  color: white;
+}
+
+#side-menu li svg {
+  width: 20px;
+  height: 20px;
+  fill: #22c55e;
+  transition: 0.3s;
+}
+
+#side-menu li:hover svg {
+  fill: white;
+}
+
+/* overlay */
+#overlay {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.6);
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s;
+  z-index:1001;
+}
+#overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+#side-menu.active{
+  left:0;
+}
+
+#side-menu.active{left:0;}
+#overlay.active{opacity:1;visibility:visible;}
+.p3{
+  margin-top: 15px;
+  font-size: 14px;
+  color: #4ac679;
+}
+@font-face {
+  font-family: 'MiFuente'; /* Nombre que usarás en CSS */
+  src: url('sprite-graffiti.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
   </style>
 </head>
 
 <body>
+  <div id="overlay"></div>
+
+<nav id="side-menu">
+  <ul>
+    <li onclick="scrollToSection('vapes')">🔥 Vapes</li>
+    <li onclick="scrollToSection('combos')">💰 Combos</li>
+    <li onclick="scrollToSection('ropa-section')">👕 Ropa</li>
+    <li onclick="scrollToSection('accesorios')">🌿 Accesorios</li>
+  </ul>
+</nav>
+  <header class="topbar">
+  <div class="menu-btn">☰</div>
+
+  <div class="logo">
+    <img src="img/LOGOHEADER.png" alt="logo">
+  </div>
+
+
+</header>
 
   <button id="cart-btn" onclick="toggleCart()">🛒 (<span id="count">0</span>)</button>
 
   <div id="cart">
-    <button onclick="toggleCart()" style="float:right;background:red;color:white;border:none;">X</button>
     <h2>Tu pedido 💨</h2>
     <div id="cart-items"></div>
     <p id="total">Total: $0</p>
@@ -369,23 +639,41 @@ button {
   </div>
 
   <header>
-    <h1></h1>
-    
+  
+  <h1></h1>
 
-    <div class="contador">
-      <div><span id="dias">0</span>d</div>
-      <div><span id="horas">0</span>h</div>
-      <div><span id="minutos">0</span>m</div>
-      <div><span id="segundos">0</span>s</div>
-    </div>
+  <p class="subtitle">Vape Store · Estilo urbano premium</p>
 
-    <a class="btn whatsapp" href="https://wa.me/573052249071">WhatsApp</a>
-    <a class="btn instagram" href="https://instagram.com/greenhouse025">Instagram</a>
-    <p>Vape Store · Estilo urbano premium</p>
-  </header>
+  <!-- CONTADOR -->
+  <div class="contador">
+    <div><span id="dias">0</span>d</div>
+    <div><span id="horas">0</span>h</div>
+    <div><span id="minutos">0</span>m</div>
+    <div><span id="segundos">0</span>s</div>
+  </div>
+
+  <div class="actions">
+
+  <!-- WHATSAPP -->
+  <a class="btn-icon whatsapp" href="https://wa.me/573052249071">
+    <svg viewBox="0 0 32 32">
+      <path fill="currentColor" d="M16 .4C7.4.4.4 7.4.4 16c0 2.8.7 5.5 2.1 7.9L.3 31.7l8-2.1c2.3 1.3 4.9 2 7.7 2 8.6 0 15.6-7 15.6-15.6S24.6.4 16 .4zm0 28.6c-2.4 0-4.8-.6-6.9-1.8l-.5-.3-4.8 1.3 1.3-4.7-.3-.5c-1.3-2.1-2-4.5-2-7C2.8 8.5 8.5 2.8 16 2.8S29.2 8.5 29.2 16 23.5 29 16 29zm7.6-10.4c-.4-.2-2.3-1.1-2.6-1.2-.4-.1-.6-.2-.9.2s-1 1.2-1.2 1.4c-.2.2-.4.3-.8.1-2.3-1.1-3.8-2-5.3-4.6-.4-.7.4-.6 1.1-2 .1-.2.1-.5 0-.7s-.9-2.2-1.2-3c-.3-.7-.6-.6-.9-.6h-.8c-.3 0-.7.1-1 .5s-1.3 1.3-1.3 3.2 1.4 3.8 1.6 4.1c.2.3 2.8 4.2 6.8 5.9.9.4 1.6.6 2.2.7.9.1 1.7.1 2.3.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.2-.3-.3-.7-.5z"/>
+    </svg>
+  </a>
+
+  <!-- INSTAGRAM -->
+  <a class="btn-icon instagram" href="https://instagram.com/greenhouse025">
+    <svg viewBox="0 0 32 32">
+      <path fill="currentColor" d="M16 7.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6zm0 14.5a5.7 5.7 0 1 1 0-11.4 5.7 5.7 0 0 1 0 11.4zm11.2-14.7a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM32 9.4c0-2.5-.5-4.3-1.2-5.8-.7-1.5-1.7-2.7-3.2-3.4C26.1-.5 24.3-1 21.8-1H10.2C7.7-1 5.9-.5 4.4.2 2.9.9 1.9 2.1 1.2 3.6.5 5.1 0 6.9 0 9.4v13.2c0 2.5.5 4.3 1.2 5.8.7 1.5 1.7 2.7 3.2 3.4 1.5.7 3.3 1.2 5.8 1.2h11.6c2.5 0 4.3-.5 5.8-1.2 1.5-.7 2.5-1.9 3.2-3.4.7-1.5 1.2-3.3 1.2-5.8V9.4zm-3.1 13.2c0 2-.4 3.1-.7 3.8-.4.8-.9 1.3-1.7 1.7-.7.3-1.8.7-3.8.7H10.2c-2 0-3.1-.4-3.8-.7-.8-.4-1.3-.9-1.7-1.7-.3-.7-.7-1.8-.7-3.8V9.4c0-2 .4-3.1.7-3.8.4-.8.9-1.3 1.7-1.7.7-.3 1.8-.7 3.8-.7h11.6c2 0 3.1.4 3.8.7.8.4 1.3.9 1.7 1.7.3.7.7 1.8.7 3.8v13.2z"/>
+    </svg>
+  </a>
+
+</div>
+
+</header>
 
   <!-- VAPES -->
-  <section class="section">
+  <section class="section" id="vapes">
     <h2>🔥 Vapes</h2>
     <div class="products">
 
@@ -396,15 +684,15 @@ button {
           <img src="vapes/YOVO- MIAMI MENT.jpeg" class="img-static">
 
           <!-- Video que reemplaza la imagen -->
-          <video class="img-video" muted loop playsinline>
+          <video class="img-video" muted loop playsinline webkit-playsinline preload="metadata">
             <source src="animaciones/animacion YOVO-MIAMI MENT.mp4" type="video/mp4">
           </video>
         </div>
 
         <div class="content">
-          <h3>YOVO Miami Mint</h3>
+          <h3>YOVO</h3>
           <p class="price">$35.000</p>
-          <button class="buy" onclick="addToCart('YOVO Miami Mint',40000)">Agregar</button>
+          <button class="buy" onclick="addToCart('YOVO',40000)">Agregar</button>
         </div>
       </div>
       <div class="card vape">
@@ -414,7 +702,7 @@ button {
           <img src="vapes/UBARXHYDRA8000.jpeg" class="img-static">
 
           <!-- Video que reemplaza la imagen -->
-          <video class="img-video" muted loop playsinline>
+         <video class="img-video" muted loop playsinline webkit-playsinline preload="metadata">
             <source src="animaciones/animacion URBARXHYDRA8000.mp4" type="video/mp4">
           </video>
         </div>
@@ -433,7 +721,7 @@ button {
           <img src="vapes/V-PLAY.jpeg" class="img-static">
 
           <!-- Video que reemplaza la imagen -->
-          <video class="img-video" muted loop playsinline>
+          <video class="img-video" muted loop playsinline webkit-playsinline preload="metadata">
             <source src="animaciones/animacion V-PLAY.mp4" type="video/mp4">
           </video>
         </div>
@@ -451,7 +739,7 @@ button {
           <img src="vapes/AIR FUZE SMART 30000.jpeg" class="img-static">
 
           <!-- Video que reemplaza la imagen -->
-          <video class="img-video" muted loop playsinline>
+          <video class="img-video" muted loop playsinline webkit-playsinline preload="metadata">
             <source src="animaciones/animacion AIR FUZE SMART 30000.mp4" type="video/mp4">
           </video>
         </div>
@@ -469,15 +757,15 @@ button {
           <img src="vapes/SNOOPYSMOKE-STRAWBERRYBANANA.jpeg" class="img-static">
 
           <!-- Video que reemplaza la imagen -->
-          <video class="img-video" muted loop playsinline>
+          <video class="img-video" muted loop playsinline webkit-playsinline preload="metadata">
             <source src="animaciones/animacion SNOOPYSMOKE-STRAWBERRYBANANA.mp4" type="video/mp4">
           </video>
         </div>
 
         <div class="content">
-          <h3>Snoopy Smoke - Strawberry Banana</h3>
+          <h3>Snoopy Smoke</h3>
           <p class="price">$35.000</p>
-          <button class="buy" onclick="addToCart('Snoopy Smoke - Strawberry Banana',80000)">Agregar</button>
+          <button class="buy" onclick="addToCart('Snoopy Smoke',80000)">Agregar</button>
         </div>
       </div>
       <div class="card vape">
@@ -487,15 +775,15 @@ button {
           <img src="vapes/FUNKY-REPUBLIC STRAWBERRY DUO ICE.jpeg" class="img-static">
 
           <!-- Video que reemplaza la imagen -->
-          <video class="img-video" muted loop playsinline>
+          <video class="img-video" muted loop playsinline webkit-playsinline preload="metadata">
             <source src="animaciones/animacion FUNKY-REPUBLIC STRAWBERRY DUO ICE.mp4" type="video/mp4">
           </video>
         </div>
 
         <div class="content">
-          <h3>Funky Republic - Strawberry Duo Ice</h3>
+          <h3>Funky Republic Ti 7000</h3>
           <p class="price">$30.000</p>
-          <button class="buy" onclick="addToCart('Funky Republic - Strawberry Duo Ice',80000)">Agregar</button>
+          <button class="buy" onclick="addToCart('Funky Republic Ti 7000',80000)">Agregar</button>
         </div>
       </div>
       <div class="card vape">
@@ -505,7 +793,7 @@ button {
           <img src="vapes/URBARXHYDRA5000.jpeg" class="img-static">
 
           <!-- Video que reemplaza la imagen -->
-          <video class="img-video" muted loop playsinline>
+          <video class="img-video" muted loop playsinline webkit-playsinline preload="metadata">
             <source src="animaciones/animacion URBARXHYDRA5000.mp4" type="video/mp4">
           </video>
         </div>
@@ -536,7 +824,7 @@ button {
   </section>
 
   <!-- COMBOS -->
-  <section class="section">
+  <section class="section" id="combos">
     <h2>💰 Combos</h2>
     <div class="products">
 
@@ -544,6 +832,7 @@ button {
         <div class="content">
           <h3>Combo Vape</h3>
           <p class="price">2 x $65.000</p>
+          <p id="p3">valida para vapes de hasta 35.000</p>
           <button class="buy" onclick="addToCart('Combo 2 vapes',65000)">Agregar</button>
         </div>
       </div>
@@ -552,6 +841,7 @@ button {
         <div class="content">
           <h3>Combo Party</h3>
           <p class="price">3 x $90.000</p>
+          <p id="p3">valida para vapes de hasta 35.000</p>
           <button class="buy" onclick="addToCart('Combo Party',90000)">Agregar</button>
         </div>
       </div>
@@ -562,7 +852,7 @@ button {
   <!-- ROPA -->
   <section class="section ropa-section" id="ropa-section">
     <h2>👕 Coleccion Green House x MODBLOCK</h2>
-    <p>Ropa comoda, natural y estilo urbano</p>
+    <p>Ropa comoda, natural y estilo urbano bajo pedido de 2-3 dias habiles</p>
       <div class="card accesorio">
                 <div class="img-container">
           <img src="img/GREENHOUSEXMODBLOCK.jpeg" class="img-static">
@@ -606,8 +896,8 @@ button {
       </div>
       <div class="content">
         <h3>T-SHIRT BEIGE</h3>
-        <p class="price">$35.000</p>
-        <button class="buy" onclick="addToCart('T-SHIRT BEIGE',35000)">Agregar</button>
+        <p class="price">$85.000</p>
+        <button class="buy" onclick="addToCart('T-SHIRT BEIGE',85000)">Agregar</button>
       </div>
     </div>
 
@@ -617,19 +907,8 @@ button {
       </div>
       <div class="content">
         <h3>T-SHIRT BLACK</h3>
-        <p class="price">$35.000</p>
-        <button class="buy" onclick="addToCart('T-SHIRT BLACK',35000)">Agregar</button>
-      </div>
-    </div>
-
-    <div class="card accesorio">
-      <div class="img-container">
-        <img src="shirts/GREENHOUSEXMODBLOCK HODDIE BLACK.jpeg" class="img-static">
-      </div>
-      <div class="content">
-        <h3>HODDIE BLACK</h3>
-        <p class="price">$35.000</p>
-        <button class="buy" onclick="addToCart('HODDIE BLACK',35000)">Agregar</button>
+        <p class="price">$85.000</p>
+        <button class="buy" onclick="addToCart('T-SHIRT BLACK',85000)">Agregar</button>
       </div>
     </div>
 
@@ -639,35 +918,173 @@ button {
       </div>
       <div class="content"> 
         <h3>T-SHIRT RED</h3>
-        <p class="price">$35.000</p>
-        <button class="buy" onclick="addToCart('T-SHIRT RED',35000)">Agregar</button>
+        <p class="price">$85.000</p>
+        <button class="buy" onclick="addToCart('T-SHIRT RED',85000)">Agregar</button>
       </div>
     </div>
 
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK T-SHIRT WHITE .jpeg" class="img-static">
+      </div>
+      <div class="content"> 
+        <h3>T-SHIRT WHITE</h3>
+        <p class="price">$85.000</p>
+        <button class="buy" onclick="addToCart('T-SHIRT WHITE',85000)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK HODDIE BLACK.jpeg" class="img-static">
+      </div>
+      <div class="content">
+        <h3>HODDIE BLACK</h3>
+        <p class="price">$120.000</p>
+        <button class="buy" onclick="addToCart('HODDIE BLACK',120000)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK HODDIE BEIGE.jpeg" class="img-static">
+      </div>
+      <div class="content">
+        <h3>HODDIE BEIGE</h3>
+        <p class="price">$120.000</p>
+        <button class="buy" onclick="addToCart('HODDIE BEIGE',120000)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK HODDIE WHITE.jpeg" class="img-static">
+      </div>
+      <div class="content">
+        <h3>HODDIE WHITE</h3>
+        <p class="price">$120.000</p>
+        <button class="buy" onclick="addToCart('HODDIE WHITE',120000)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK HODDIE RED.jpeg" class="img-static">
+      </div>
+      <div class="content">
+        <h3>HODDIE RED</h3>
+        <p class="price">$120.000</p>
+        <button class="buy" onclick="addToCart('HODDIE RED',120000)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK HODDIE SWEATSHIRT BEIGE.jpeg" class="img-static">
+      </div>
+      <div class="content">
+        <h3>HODDIE SWEATSHIRT BEIGE</h3>
+        <p class="price">$160.000</p>
+        <button class="buy" onclick="addToCart('HODDIE SWEATSHIRT BEIGE',160000)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK HODDIE SWEATSHIRT BLACK.jpeg" class="img-static">
+      </div>
+      <div class="content">
+        <h3>HODDIE SWEATSHIRT BLACK</h3>
+        <p class="price">$160.000</p>
+        <button class="buy" onclick="addToCart('HODDIE SWEATSHIRT BLACK',160000)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK HODDIE SWEATSHIRT RED.jpeg" class="img-static">
+      </div>
+      <div class="content">
+        <h3>HODDIE SWEATSHIRT RED</h3>
+        <p class="price">$160.000</p>
+        <button class="buy" onclick="addToCart('HODDIE SWEATSHIRT RED',160000)">Agregar</button>
+      </div>
+    </div>
+
+    
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK HODDIE SWEATSHIRT WHITE.jpeg" class="img-static">
+      </div>
+      <div class="content">
+        <h3>HODDIE SWEATSHIRT WHITE</h3>
+        <p class="price">$160.000</p>
+        <button class="buy" onclick="addToCart('HODDIE SWEATSHIRT WHITE',160000)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK PANTS BEIGE.jpeg" class="img-static">
+      </div>
+      <div class="content">
+        <h3>PANTS BEIGE</h3>
+        <p class="price">$140.000</p>
+        <button class="buy" onclick="addToCart('PANTS BEIGE',140000)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK PANTS BLACK.jpeg" class="img-static">
+      </div>
+      <div class="content">
+        <h3>PANTS BLACK</h3>
+        <p class="price">$140.000</p>
+        <button class="buy" onclick="addToCart('PANTS BLACK',140000)">Agregar</button>
+         </div>
+    </div>
+
+    <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK PANTS RED.jpeg" class="img-static">
+      </div>
+    <div class="content">
+        <h3>PANTS RED</h3>
+        <p class="price">$140.000</p>
+        <button class="buy" onclick="addToCart('PANTS RED',140000)">Agregar</button>
+      </div>
   </div>
+
+  <div class="card accesorio">
+      <div class="img-container">
+        <img src="shirts/GREENHOUSEXMODBLOCK PANTS WHITE.jpeg" class="img-static">
+      </div>
+    <div class="content">
+        <h3>PANTS WHITE</h3>
+        <p class="price">$140.000</p>
+        <button class="buy" onclick="addToCart('PANTS WHITE',140000)">Agregar</button>
+      </div>
+  </div>
+
+  
+
 
 </section>
 
-  <!-- MEDIAS -->
-  <section class="section">
-    <h2>🧦 Medias</h2>
+  <section class="section" id="accesorios">
+    <h2> 🌿 Accesorios Green </h2>
     <div class="products">
 
       <div class="card">
-        <img src="https://i.pinimg.com/736x/2a/11/c1/2a11c102c2557b9c4437a455d94c053d.jpg">
+        <img src="img/ACCESORIOS.jpeg">
         <div class="content">
-          <h3>Medias Black</h3>
-          <p class="price">$12.000</p>
-          <button class="buy" onclick="addToCart('Medias Black',12000)">Agregar</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="https://i.pinimg.com/1200x/e5/f4/c3/e5f4c3780f3f0248044acfc2baa872eb.jpg">
-        <div class="content">
-          <h3>Medias White</h3>
-          <p class="price">$12.000</p>
-          <button class="buy" onclick="addToCart('Medias White',12000)">Agregar</button>
+           <a class="btn-icon whatsapp" href="https://wa.me/573052249071">
+    <svg viewBox="0 0 32 32">
+      <path fill="currentColor" d="M16 .4C7.4.4.4 7.4.4 16c0 2.8.7 5.5 2.1 7.9L.3 31.7l8-2.1c2.3 1.3 4.9 2 7.7 2 8.6 0 15.6-7 15.6-15.6S24.6.4 16 .4zm0 28.6c-2.4 0-4.8-.6-6.9-1.8l-.5-.3-4.8 1.3 1.3-4.7-.3-.5c-1.3-2.1-2-4.5-2-7C2.8 8.5 8.5 2.8 16 2.8S29.2 8.5 29.2 16 23.5 29 16 29zm7.6-10.4c-.4-.2-2.3-1.1-2.6-1.2-.4-.1-.6-.2-.9.2s-1 1.2-1.2 1.4c-.2.2-.4.3-.8.1-2.3-1.1-3.8-2-5.3-4.6-.4-.7.4-.6 1.1-2 .1-.2.1-.5 0-.7s-.9-2.2-1.2-3c-.3-.7-.6-.6-.9-.6h-.8c-.3 0-.7.1-1 .5s-1.3 1.3-1.3 3.2 1.4 3.8 1.6 4.1c.2.3 2.8 4.2 6.8 5.9.9.4 1.6.6 2.2.7.9.1 1.7.1 2.3.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.2-.3-.3-.7-.5z"/>
+    </svg>
+  </a>
+  <p class="p3">Pregunta por el accesorio que desees.</p>
         </div>
       </div>
 
@@ -748,8 +1165,40 @@ function volverRopa(){
   document.getElementById("ropa-section").style.display = "block";
   document.getElementById("ropa-catalogo").style.display = "none";
 }
-  </script>
+document.querySelectorAll(".vape, .accesorio").forEach(card => {
+  const video = card.querySelector(".img-video");
 
+  card.addEventListener("click", () => {
+    if (video.style.display === "block") {
+      video.pause();
+      video.style.display = "none";
+    } else {
+      video.style.display = "block";
+      video.play();
+    }
+  });
+});
+document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script>
+function toggleMenu(){
+  document.getElementById("side-menu").classList.toggle("active");
+  document.getElementById("overlay").classList.toggle("active");
+}
+
+document.querySelector(".menu-btn").addEventListener("click", toggleMenu);
+
+document.getElementById("overlay").addEventListener("click", toggleMenu);
+
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+  toggleMenu();
+}
+</script>
+<footer class="footer">
+  <p>© 2026 Green House Vape Store. Todos los derechos reservados.</p>
+  <p>By The Gang.</p>
+</footer>
 </body>
 
 </html>
